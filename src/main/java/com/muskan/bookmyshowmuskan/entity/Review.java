@@ -1,4 +1,4 @@
-package com.muskan.bookmyshowmuskan.bo;
+package com.muskan.bookmyshowmuskan.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -17,14 +17,17 @@ public class Review {
     String description;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "fk_movieId")
     Movie movie;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "fk_theatreId")
     Theatre theatre;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "fk_userId")
     User user;
 }

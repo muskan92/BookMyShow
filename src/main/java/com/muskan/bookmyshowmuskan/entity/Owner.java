@@ -1,4 +1,4 @@
-package com.muskan.bookmyshowmuskan.bo;
+package com.muskan.bookmyshowmuskan.entity;
 
 import lombok.Data;
 

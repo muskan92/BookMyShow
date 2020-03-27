@@ -1,7 +1,7 @@
 package com.muskan.bookmyshowmuskan.service;
 
-import com.muskan.bookmyshowmuskan.bo.MovieShow;
-import com.muskan.bookmyshowmuskan.bo.Ticket;
+import com.muskan.bookmyshowmuskan.entity.MovieShow;
+import com.muskan.bookmyshowmuskan.entity.Ticket;
 import com.muskan.bookmyshowmuskan.repository.MovieShowRepository;
 import com.muskan.bookmyshowmuskan.repository.TicketRepository;
 import org.slf4j.Logger;
@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,19 +29,27 @@ public class MovieShowService {
         return movieShows;
     }
 
-    public Ticket bookMovieShow(int movieShowId,int seatCount) {
+    public MovieShow getMovieShowById(int id) {
 
-        Ticket ticket = null;
-        Optional<MovieShow> movieShow = movieShowRepository.findById(movieShowId);
+        Optional<MovieShow> movieShow = movieShowRepository.findById(id);
+        return movieShow.get();
+    }
 
-        ticket.setMovieName(movieShow.get().getMovie().getTitle());
-        ticket.setTheatreName(movieShow.get().getTheatre().getName());
-        ticket.setScreenNumber(movieShow.get().getScreenNumber());
-        ticket.setShowTime(movieShow.get().getShowTime());
-        movieShow.get().setSeatcount(movieShow.get().getSeatcount()-seatCount);
-        ticket.setSeatNumber(movieShow.get().getSeatcount() +"to"+ movieShow.get().getSeatcount()+1);
 
-        movieShowRepository.save(movieShow.get());
+    public Ticket bookMovieShow(int movieShowId,int headCount) {
+
+        Ticket ticket = new Ticket();
+
+        MovieShow movieShow = getMovieShowById(movieShowId);
+
+        ticket.setMovieName(movieShow.getMovie().getTitle());
+        ticket.setTheatreName(movieShow.getTheatre().getName());
+        ticket.setScreenNumber(movieShow.getScreenNumber());
+        ticket.setShowTime(movieShow.getShowTime());
+        movieShow.setSeatcount(movieShow.getSeatcount()-headCount);
+        ticket.setSeatNumber(movieShow.getSeatcount() +"to"+ movieShow.getSeatcount()+1);
+
+        movieShowRepository.save(movieShow);
         return ticketRepository.save(ticket);
 
     }

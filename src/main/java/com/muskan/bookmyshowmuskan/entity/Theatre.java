@@ -1,4 +1,4 @@
-package com.muskan.bookmyshowmuskan.bo;
+package com.muskan.bookmyshowmuskan.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -27,7 +27,7 @@ public class Theatre {
     @OneToOne
     Address address;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "theatre")
     List<Review> reviews = new ArrayList<>();
 
@@ -35,4 +35,9 @@ public class Theatre {
     @OneToMany(mappedBy = "theatre")
     List<MovieShow> movieShow = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Theatre[id=" + id + ", name=" + name
+                + " , rating=" + rating +" ,owner= " + owner +" , address= "+ address +"]";
+    }
 }

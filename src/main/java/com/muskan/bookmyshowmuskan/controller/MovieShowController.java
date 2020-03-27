@@ -1,7 +1,8 @@
 package com.muskan.bookmyshowmuskan.controller;
 
-import com.muskan.bookmyshowmuskan.bo.MovieShow;
-import com.muskan.bookmyshowmuskan.bo.Ticket;
+import com.muskan.bookmyshowmuskan.bo.TicketPayload;
+import com.muskan.bookmyshowmuskan.entity.MovieShow;
+import com.muskan.bookmyshowmuskan.entity.Ticket;
 import com.muskan.bookmyshowmuskan.service.MovieShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,11 +24,20 @@ public class MovieShowController {
         List<MovieShow> movieShows = movieShowService.getAllMovieShow();
         return new ResponseEntity<>(movieShows, HttpStatus.OK);
     }
+//getMovieShowById
 
-    @RequestMapping(path = "/book/{seatCount}/{movieShowId}", method = RequestMethod.GET)
-    public ResponseEntity<Ticket> bookMovieShow(@PathVariable("seatCount") int seatCount,@PathVariable("movieShowId") int movieShowId){
+    @RequestMapping(path = "/getById/{id}", method = RequestMethod.GET)
+    public ResponseEntity<MovieShow> getMovieShowById(@PathVariable int id){
 
-        Ticket ticket = movieShowService.bookMovieShow(movieShowId,seatCount);
+        MovieShow movieShows = movieShowService.getMovieShowById(id);
+        return new ResponseEntity<>(movieShows, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(path = "/book", method = RequestMethod.POST)
+    public ResponseEntity<Ticket> bookMovieShow(@RequestBody TicketPayload ticketPayload){
+
+        Ticket ticket = movieShowService.bookMovieShow(ticketPayload.getMovieShowId(),ticketPayload.getHeadCount());
         return new ResponseEntity<>(ticket,HttpStatus.OK);
     }
 }

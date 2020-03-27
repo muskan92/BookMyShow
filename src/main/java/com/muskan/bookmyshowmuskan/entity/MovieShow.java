@@ -1,12 +1,12 @@
-package com.muskan.bookmyshowmuskan.bo;
+package com.muskan.bookmyshowmuskan.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -34,6 +34,7 @@ public class MovieShow {
 
     //@OneToMany(mappedBy = "movieShow")
     @OneToMany
+    @JsonIgnore
     List<Ticket> tickets = new ArrayList<>();
 
 }

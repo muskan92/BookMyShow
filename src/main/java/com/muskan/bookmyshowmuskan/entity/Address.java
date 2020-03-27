@@ -1,8 +1,6 @@
-package com.muskan.bookmyshowmuskan.bo;
+package com.muskan.bookmyshowmuskan.entity;
 
-import lombok.Builder;
 import lombok.Data;
-import com.muskan.bookmyshowmuskan.bo.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

@@ -1,9 +1,7 @@
 package com.muskan.bookmyshowmuskan.service;
 
-import com.muskan.bookmyshowmuskan.bo.Address;
 import com.muskan.bookmyshowmuskan.bo.LoginUser;
-import com.muskan.bookmyshowmuskan.bo.User;
-import com.muskan.bookmyshowmuskan.exception.AccountAlreadyExistException;
+import com.muskan.bookmyshowmuskan.entity.User;
 import com.muskan.bookmyshowmuskan.repository.AddressRepository;
 import com.muskan.bookmyshowmuskan.repository.UserRepository;
 import org.slf4j.Logger;
@@ -12,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -71,5 +70,11 @@ public class UserService {
             return HttpStatus.UNAUTHORIZED;
         }
     }
+
+    public List<User> getAllUser(){
+          List<User> userList = userRepository.findAll();
+          return userList;
+    };
+
 
 }

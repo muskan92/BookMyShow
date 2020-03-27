@@ -1,4 +1,4 @@
-package com.muskan.bookmyshowmuskan.bo;
+package com.muskan.bookmyshowmuskan.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -37,7 +37,7 @@ public class Movie {
     @Column
     boolean isActive;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "movie")
     List<Review> reviews = new ArrayList<>();
 

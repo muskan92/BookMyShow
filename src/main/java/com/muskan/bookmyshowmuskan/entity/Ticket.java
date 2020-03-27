@@ -1,4 +1,4 @@
-package com.muskan.bookmyshowmuskan.bo;
+package com.muskan.bookmyshowmuskan.entity;
 
 import lombok.Data;
 
@@ -31,4 +31,8 @@ public class Ticket {
 
     @Column
     String qrCode;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_userid")
+    User user;
 }

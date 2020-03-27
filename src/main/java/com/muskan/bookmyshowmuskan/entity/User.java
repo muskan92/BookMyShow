@@ -1,8 +1,7 @@
-package com.muskan.bookmyshowmuskan.bo;
+package com.muskan.bookmyshowmuskan.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,10 +34,10 @@ public class User {
     @NotNull
     String password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     List<Ticket> ticketList;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "user")
     List<Review> reviews = new ArrayList<>();
 

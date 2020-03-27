@@ -3,8 +3,8 @@ package com.muskan.bookmyshowmuskan.bo;
 import lombok.Data;
 
 @Data
-public class LoginUser {
+public class TicketPayload {
 
-    String email;
-    String password;
+    int movieShowId;
+    int headCount;
 }

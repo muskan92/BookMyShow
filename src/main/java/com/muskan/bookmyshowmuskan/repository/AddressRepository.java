@@ -1,6 +1,6 @@
 package com.muskan.bookmyshowmuskan.repository;
 
-import com.muskan.bookmyshowmuskan.bo.Address;
+import com.muskan.bookmyshowmuskan.entity.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
