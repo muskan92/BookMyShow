@@ -1,5 +1,6 @@
 package com.muskan.bookmyshowmuskan.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class MovieShow {
     int id;
 
     @Column
+    //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date showTime;
 
     @Column
@@ -25,11 +27,13 @@ public class MovieShow {
     //Set<Integer> seatNumber;
     Integer seatcount;
 
-    @ManyToOne
-    @JoinColumn(name = "theatre_Id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_theatre_Id")
     Theatre theatre;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_movie_Id")
     Movie movie;
 
     //@OneToMany(mappedBy = "movieShow")
@@ -37,4 +41,11 @@ public class MovieShow {
     @JsonIgnore
     List<Ticket> tickets = new ArrayList<>();
 
+    @OneToMany(mappedBy = "movieShow", cascade = CascadeType.ALL)
+    List<Seat> seats;
+
+    @Override
+    public String toString() {
+        return null;
+    }
 }

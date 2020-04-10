@@ -16,7 +16,7 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
 
-    @Column
+    @Column(unique = true)
     String title;
 
     @Column
@@ -38,7 +38,10 @@ public class Movie {
     boolean isActive;
 
     //@JsonIgnore
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "movie")
+    List<MovieShow> movieShows = new ArrayList<>();
 
 }

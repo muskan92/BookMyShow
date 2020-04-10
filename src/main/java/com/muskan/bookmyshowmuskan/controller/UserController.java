@@ -20,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public ResponseEntity<String> addUser(@RequestBody User user)  {
+    public ResponseEntity<User> addUser(@RequestBody User user)  {
         return new ResponseEntity<>(userService.addUser(user),HttpStatus.OK);
     }
 
@@ -42,6 +42,11 @@ public class UserController {
         return new ResponseEntity<>(userService.loginUser(loginUser));
     }
 
+    @RequestMapping(path = "/logout", method = RequestMethod.GET)
+    public ResponseEntity<HttpStatus> userLogout(){
+
+        return new ResponseEntity<>(userService.logoutUser());
+    }
 
     @RequestMapping(path = "/getAll", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAllUser()  {

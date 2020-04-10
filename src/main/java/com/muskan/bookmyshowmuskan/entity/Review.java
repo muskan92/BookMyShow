@@ -18,16 +18,16 @@ public class Review {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "fk_movieId")
+    @JoinColumn(name = "fk_movie_Id")
     Movie movie;
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "fk_theatreId")
+    @JoinColumn(name = "fk_theatre_Id")
     Theatre theatre;
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "fk_userId")
+    @JoinColumn(name = "fk_user_Id")
     User user;
 }

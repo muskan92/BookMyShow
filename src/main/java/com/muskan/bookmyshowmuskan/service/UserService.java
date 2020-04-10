@@ -1,7 +1,9 @@
 package com.muskan.bookmyshowmuskan.service;
 
 import com.muskan.bookmyshowmuskan.bo.LoginUser;
+import com.muskan.bookmyshowmuskan.bo.UserSession;
 import com.muskan.bookmyshowmuskan.entity.User;
+import com.muskan.bookmyshowmuskan.exception.AccountAlreadyExistException;
 import com.muskan.bookmyshowmuskan.repository.AddressRepository;
 import com.muskan.bookmyshowmuskan.repository.UserRepository;
 import org.slf4j.Logger;
@@ -24,16 +26,19 @@ public class UserService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private UserSession userSession;
 
-    public String addUser(User entity) {
+
+    public User addUser(User entity) {
         Optional<User> optionalUser = userRepository.findByEmail(entity.getEmail());
         HttpStatus httpStatus;
         if (optionalUser.isPresent()) {
-            return "Account already exist with email : "+entity.getEmail();
+            //return "Account already exist with email : "+entity.getEmail();
+            throw new AccountAlreadyExistException("Account already exist with email:"+entity.getEmail());
         }else{
             logger.info("Adding new user");
-            userRepository.save(entity);
-            return "Account created.";
+            return userRepository.save(entity);
         }
 
     }
@@ -65,6 +70,9 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findByEmail(loginUser.getEmail());
         if (optionalUser.isPresent() && loginUser.getPassword().equals(optionalUser.get().getPassword())) {
 
+            userSession.setEmail(loginUser.getEmail());
+            userSession.setLoggedIn(true);
+
             return HttpStatus.OK;
         } else {
             return HttpStatus.UNAUTHORIZED;
@@ -75,6 +83,13 @@ public class UserService {
           List<User> userList = userRepository.findAll();
           return userList;
     };
+
+    public HttpStatus logoutUser() {
+
+        userSession.setLoggedIn(false);
+        return HttpStatus.OK;
+
+    }
 
 
 }

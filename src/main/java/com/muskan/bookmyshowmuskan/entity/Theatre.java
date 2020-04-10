@@ -28,16 +28,15 @@ public class Theatre {
     Address address;
 
     //@JsonIgnore
-    @OneToMany(mappedBy = "theatre")
+    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
     List<Review> reviews = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "theatre")
     List<MovieShow> movieShow = new ArrayList<>();
 
-    @Override
+   @Override
     public String toString() {
-        return "Theatre[id=" + id + ", name=" + name
-                + " , rating=" + rating +" ,owner= " + owner +" , address= "+ address +"]";
+        return null;
     }
 }

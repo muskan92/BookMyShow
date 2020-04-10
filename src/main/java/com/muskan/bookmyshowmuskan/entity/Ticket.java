@@ -1,5 +1,6 @@
 package com.muskan.bookmyshowmuskan.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Ticket {
     int screenNumber;
 
     @Column
+    //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date showTime;
 
     @Column
@@ -33,6 +35,7 @@ public class Ticket {
     String qrCode;
 
     @ManyToOne
-    @JoinColumn(name = "fk_userid")
+    @JsonIgnore
+    @JoinColumn(name = "fk_user_Id")
     User user;
 }

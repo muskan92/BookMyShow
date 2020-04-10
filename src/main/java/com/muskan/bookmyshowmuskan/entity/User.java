@@ -34,11 +34,11 @@ public class User {
     @NotNull
     String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Ticket> ticketList;
 
     //@JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Review> reviews = new ArrayList<>();
 
 
