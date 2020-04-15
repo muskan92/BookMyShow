@@ -29,7 +29,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
         logger.info("starting urlRequest{} method{}", httpServletRequest.getRequestURL(), httpServletRequest.getMethod());
 
-        if(!userSession.isLoggedIn()){
+        if(!userSession.isLoggedIn() && !httpServletRequest.getRequestURL().toString().contains("user/login")){
             throw new UserNotAuthorizedException("user is not logged in");
         }
 

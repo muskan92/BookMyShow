@@ -1,0 +1,21 @@
+version: "3"
+services:
+  muskan-bookmyshow:
+    image: muskan/bookmyshow
+    ports:
+      - "8080:8004"
+    networks:
+      - muskan-bookmyshow
+    depends_on:
+      - mysqldb
+
+  mysqldb:
+    image: mysql
+    networks:
+      - muskan-bookmyshow
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_DATABASE=bookmyshow
+
+networks:
+  muskan-bookmyshow:
